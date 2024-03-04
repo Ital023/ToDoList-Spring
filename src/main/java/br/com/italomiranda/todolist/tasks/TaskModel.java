@@ -10,7 +10,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+//Lombok cria @Data (getters e setters) para todos os atributos
 @Data
+//Cria uma tabela chamada tb_tasks no db
 @Entity(name = "tb_tasks")
 public class TaskModel {
     @Id

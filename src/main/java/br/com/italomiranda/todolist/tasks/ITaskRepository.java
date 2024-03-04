@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ITaskRepository extends JpaRepository<TaskModel, UUID> {
+    //Busca no DB apartir do usuario do parametro todas as suas tasks
     List<TaskModel> findByIdUser(UUID idUser);
 
 }

@@ -19,8 +19,14 @@ public class TaskController {
     @PostMapping("/")
     public ResponseEntity create(@RequestBody TaskModel taskModel, HttpServletRequest request){
 
+        //Processo do filter...
+
+
+        //Apos o request atributte "idUser" ser setado com o user logado no auth, ele eh recuperado do request e definido no atributo da task
         taskModel.setIdUser((UUID) request.getAttribute("idUser"));
 
+
+        //Verificação de datas
         var currentDate = LocalDateTime.now();
 
         if(currentDate.isAfter(taskModel.getStartAt()) || currentDate.isAfter(taskModel.getEndAt()) ){
@@ -31,8 +37,7 @@ public class TaskController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A data de inicio deve ser menor do que a de termino");
         }
 
-
-
+        //save no DB
         var task = this.iTaskRepository.save(taskModel);
         return ResponseEntity.status(HttpStatus.OK).body(task);
     }
